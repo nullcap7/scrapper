@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 20
 
-      # 3️⃣ Install Puppeteer latest version
+      # 3️⃣ Install latest Puppeteer
       - run: npm install puppeteer@latest
 
       # 4️⃣ Run Puppeteer script
@@ -63,7 +63,8 @@ jobs:
                   console.log("⚠️ Page load timeout:", e.message);
               }
 
-              await page.waitForTimeout(3000); // small wait for late .m3u8 requests
+              // ✅ Wait for late .m3u8 requests
+              await new Promise(r => setTimeout(r, 3000));
 
               const output = Array.from(streamUrls);
               const fileContent = output.length > 0 ? output.join('\n') : 'No URLs found';
@@ -80,5 +81,6 @@ jobs:
         with:
           name: m3u-links
           path: m3u_links.txt
+
 
 
