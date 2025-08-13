@@ -3,18 +3,18 @@ name: Puppeteer M3U Scraper
 on:
   schedule:
     - cron: "0 */2 * * *"  # every 2 hours
-  workflow_dispatch:        # allows manual run
+  workflow_dispatch:        # manual trigger
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4  # Ensure you're using the latest version
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4  # Update to the latest version
         with:
-          node-version: 18
+          node-version: 20
 
       - run: npm install puppeteer
 
@@ -62,7 +62,7 @@ jobs:
           EOF
 
       - name: Upload M3U Links Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4  # Updated to v4
         with:
           name: m3u-links
           path: m3u_links.txt
