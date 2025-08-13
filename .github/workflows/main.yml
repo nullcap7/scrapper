@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.token }} # Use your secure PAT for push access
+          token: ${{ secrets.PAT_TOKEN }} # Use your secure PAT for push access
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
