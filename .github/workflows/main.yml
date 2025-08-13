@@ -1,131 +1,73 @@
-name: Nova TV M3U Scraper (tvmaniabg with Referer)
+name: Run M3U Scraper
 
 on:
+  workflow_dispatch: # Run manually from Actions tab
   schedule:
-    - cron: "0 */2 * * *"  # every 2 hours
-  workflow_dispatch:        # manual trigger
+    - cron: "0 */6 * * *" # Optional: every 6 hours
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install puppeteer@latest
 
-      - name: Run Puppeteer Script
+      - name: Install Puppeteer
+        run: npm install puppeteer
+
+      - name: Create scraper script
         run: |
-          node <<'EOF'
+          cat << 'EOF' > scraper.js
           const puppeteer = require('puppeteer');
           const fs = require('fs');
 
           (async () => {
-              const browser = await puppeteer.launch({
-                  headless: "new",
-                  args: [
-                      '--no-sandbox',
-                      '--disable-setuid-sandbox',
-                      '--disable-dev-shm-usage',
-                      '--disable-gpu',
-                      '--mute-audio'
-                  ]
-              });
+            const browser = await puppeteer.launch({
+              headless: true,
+              args: ['--no-sandbox', '--disable-setuid-sandbox']
+            });
+            const page = await browser.newPage();
+            await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0 Safari/537.36');
 
-              const page = await browser.newPage();
-              
-              // Set exact headers from your example
-              await page.setExtraHTTPHeaders({
-                  'Referer': 'https://tvmaniabg.com/nova-tv/',
-                  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',
-                  'Origin': 'https://tvmaniabg.com'
-              });
+            const m3uLinks = new Set();
 
-              await page.setViewport({ width: 1920, height: 1080 });
-
-              console.log('🌐 Loading tvmaniabg.com/nova-tv/ with custom headers...');
-              let streamUrl = null;
-
-              // Intercept all requests
-              await page.setRequestInterception(true);
-              page.on('request', (request) => {
-                  const url = request.url();
-                  if (url.includes('ortepe.xyz') && 
-                      (url.includes('playlist.m3u8') || url.includes('chunks.m3u8')) && 
-                      url.includes('novatv')) {
-                      console.log('✅ Found stream URL:', url);
-                      streamUrl = url;
-                      request.abort();  // No need to actually load the stream
-                  } else {
-                      request.continue();
-                  }
-              });
-
-              try {
-                  // Navigate to page with custom headers
-                  await page.goto('https://tvmaniabg.com/nova-tv/', {
-                      waitUntil: 'networkidle2',
-                      timeout: 30000
-                  });
-
-                  // Wait for player initialization
-                  await new Promise(r => setTimeout(r, 5000));
-
-                  // Try to interact with player
-                  const playButtonSelectors = [
-                      '.play-button',
-                      '.vjs-big-play-button',
-                      '[aria-label="Play"]',
-                      '.plyr__control--overlaid',
-                      'button[title="Play"]'
-                  ];
-                  
-                  for (const selector of playButtonSelectors) {
-                      try {
-                          await page.click(selector);
-                          console.log(`▶️ Clicked play button (${selector})`);
-                          await new Promise(r => setTimeout(r, 3000));
-                          break;
-                      } catch (e) {
-                          // Ignore if not found
-                      }
-                  }
-
-                  // Additional wait for streams
-                  await new Promise(r => setTimeout(r, 5000));
-
-              } catch (e) {
-                  console.log('⚠️ Error during scraping:', e.message);
+            page.on('request', request => {
+              const url = request.url();
+              if (url.match(/\.m3u(8)?(\?.*)?$/i)) {
+                m3uLinks.add(url);
               }
+            });
 
-              // Save results
-              if (streamUrl) {
-                  fs.writeFileSync('m3u_links.txt', streamUrl);
-                  console.log(`🔗 Saved M3U8 URL: ${streamUrl}`);
-                  
-                  // Also save the required headers
-                  const headers = {
-                      'Referer': 'https://tvmaniabg.com/nova-tv/',
-                      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',
-                      'Origin': 'https://tvmaniabg.com'
-                  };
-                  fs.writeFileSync('headers.json', JSON.stringify(headers, null, 2));
-                  console.log('📄 Saved required headers to headers.json');
-              } else {
-                  fs.writeFileSync('m3u_links.txt', 'No M3U8 URL found');
-                  console.log('❌ No M3U8 URL found');
-              }
+            await page.goto('https://tvmaniabg.com/nova-tv/', { waitUntil: 'networkidle2' });
 
-              await browser.close();
+            // Wait for player to load
+            await new Promise(resolve => setTimeout(resolve, 5000));
+
+            // Also search in HTML in case link is embedded
+            const html = await page.content();
+            const regex = /https?:\/\/[^\s'"]+\.m3u(8)?[^\s'"]*/gi;
+            const matches = html.match(regex);
+            if (matches) matches.forEach(loc => m3uLinks.add(loc));
+
+            fs.writeFileSync('links.txt', Array.from(m3uLinks).join('\n'));
+            console.log('Found links:', Array.from(m3uLinks));
+
+            await browser.close();
           })();
           EOF
 
-      - name: Upload M3U Links Artifact
+      - name: Run scraper
+        run: node scraper.js
+
+      - name: Upload found links
         uses: actions/upload-artifact@v4
         with:
           name: m3u-links
-          path: |
-            m3u_links.txt
-            headers.json
+          path: links.txt
+
