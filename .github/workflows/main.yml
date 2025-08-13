@@ -8,17 +8,62 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+
       - run: npm install puppeteer
-      - run: |
-          echo "// Puppeteer script" > scraper.js
-          # Paste your Puppeteer script here if you want inline
-          node scraper.js
-      - uses: actions/upload-artifact@v4
+
+      - name: Run Puppeteer Script
+        run: |
+          node <<'EOF'
+          const puppeteer = require('puppeteer');
+          const fs = require('fs');
+
+          (async () => {
+              const browser = await puppeteer.launch({ headless: "new" });
+              const page = await browser.newPage();
+
+              await page.setExtraHTTPHeaders({
+                  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                  "Referer": "https://nova.bg/"
+              });
+
+              console.log('🌐 Loading nova.bg/live...');
+              let streamUrls = new Set();
+
+              page.on('response', response => {
+                  const url = response.url();
+                  if (url.includes('.m3u8')) {
+                      console.log('✅ Found:', url);
+                      streamUrls.add(url);
+                  }
+              });
+
+              try {
+                  await page.goto('https://nova.bg/live', { waitUntil: 'networkidle2', timeout: 15000 });
+              } catch (e) {
+                  console.log("⚠️ Page load timeout:", e.message);
+              }
+
+              await page.waitForTimeout(5000); // wait for any late .m3u8 requests
+
+              const output = Array.from(streamUrls);
+              const fileContent = output.length > 0 ? output.join('\n') : 'No URLs found';
+              fs.writeFileSync('m3u_links.txt', fileContent);
+
+              console.log(`🔗 Saved ${output.length} M3U links to m3u_links.txt`);
+              await browser.close();
+          })();
+          EOF
+
+      - name: Upload M3U Links Artifact
+        uses: actions/upload-artifact@v3
         with:
           name: m3u-links
           path: m3u_links.txt
+
