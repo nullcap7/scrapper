@@ -10,14 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4  # Ensure you're using the latest version
+      # 1️⃣ Checkout repository
+      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4  # Update to the latest version
+      # 2️⃣ Setup Node.js
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - run: npm install puppeteer
+      # 3️⃣ Install Puppeteer latest version
+      - run: npm install puppeteer@latest
 
+      # 4️⃣ Run Puppeteer script
       - name: Run Puppeteer Script
         run: |
           node <<'EOF'
@@ -25,7 +29,16 @@ jobs:
           const fs = require('fs');
 
           (async () => {
-              const browser = await puppeteer.launch({ headless: "new" });
+              const browser = await puppeteer.launch({
+                  headless: "new",
+                  args: [
+                      '--no-sandbox',
+                      '--disable-setuid-sandbox',
+                      '--disable-dev-shm-usage',
+                      '--disable-gpu'
+                  ]
+              });
+
               const page = await browser.newPage();
 
               await page.setExtraHTTPHeaders({
@@ -45,12 +58,12 @@ jobs:
               });
 
               try {
-                  await page.goto('https://nova.bg/live', { waitUntil: 'networkidle2', timeout: 15000 });
+                  await page.goto('https://nova.bg/live', { waitUntil: 'domcontentloaded', timeout: 15000 });
               } catch (e) {
                   console.log("⚠️ Page load timeout:", e.message);
               }
 
-              await page.waitForTimeout(5000); // wait for any late .m3u8 requests
+              await page.waitForTimeout(3000); // small wait for late .m3u8 requests
 
               const output = Array.from(streamUrls);
               const fileContent = output.length > 0 ? output.join('\n') : 'No URLs found';
@@ -61,9 +74,11 @@ jobs:
           })();
           EOF
 
+      # 5️⃣ Upload artifact
       - name: Upload M3U Links Artifact
-        uses: actions/upload-artifact@v4  # Updated to v4
+        uses: actions/upload-artifact@v4
         with:
           name: m3u-links
           path: m3u_links.txt
+
 
