@@ -1,4 +1,4 @@
-name: Nova TV M3U Scraper
+name: Nova TV M3U Scraper (tvmaniabg)
 
 on:
   schedule:
@@ -38,37 +38,52 @@ jobs:
               await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
               await page.setViewport({ width: 1920, height: 1080 });
 
-              console.log('🌐 Loading nova.bg/live...');
-              const streamUrls = new Set();
+              console.log('🌐 Loading tvmaniabg.com/nova-tv/...');
+              let streamUrl = null;
 
-              // Listen for all responses
-              page.on('response', async (response) => {
-                  const url = response.url();
-                  if (url.includes('.m3u8') || url.includes('master.m3u8')) {
-                      console.log('✅ Found stream:', url);
-                      streamUrls.add(url);
+              // Intercept all requests
+              await page.setRequestInterception(true);
+              page.on('request', (request) => {
+                  const url = request.url();
+                  if (url.includes('ortepe.xyz') && url.includes('chunks.m3u8') && url.includes('novatv')) {
+                      console.log('✅ Found stream URL:', url);
+                      streamUrl = url;
+                      request.abort();  // No need to actually load the stream
+                  } else {
+                      request.continue();
                   }
               });
 
               try {
-                  // Navigate to page and wait for player to load
-                  await page.goto('https://nova.bg/live', {
+                  // Navigate to page
+                  await page.goto('https://tvmaniabg.com/nova-tv/', {
                       waitUntil: 'networkidle2',
                       timeout: 30000
                   });
 
-                  // Wait specifically for the video player to load
-                  await page.waitForSelector('video', { timeout: 10000 });
+                  // Wait for player to potentially load
+                  await new Promise(r => setTimeout(r, 5000));
 
-                  // Sometimes you need to interact with the player
-                  try {
-                      await page.click('.play-button');
-                      console.log('▶️ Clicked play button');
-                  } catch (e) {
-                      console.log('ℹ️ No play button found or already playing');
+                  // Try to click play button if exists
+                  const playButtons = [
+                      '.play-button',
+                      '.vjs-big-play-button',
+                      '[aria-label="Play"]',
+                      '.plyr__control--overlaid'
+                  ];
+                  
+                  for (const selector of playButtons) {
+                      try {
+                          await page.click(selector);
+                          console.log(`▶️ Clicked play button (${selector})`);
+                          await new Promise(r => setTimeout(r, 3000));
+                          break;
+                      } catch (e) {
+                          // Ignore if not found
+                      }
                   }
 
-                  // Wait for streams to load
+                  // Additional wait for streams
                   await new Promise(r => setTimeout(r, 5000));
 
               } catch (e) {
@@ -76,17 +91,12 @@ jobs:
               }
 
               // Save results
-              const output = Array.from(streamUrls).filter(url => 
-                  url.includes('nova') || url.includes('netcom')
-              );
-
-              if (output.length > 0) {
-                  fs.writeFileSync('m3u_links.txt', output.join('\n'));
-                  console.log(`🔗 Saved ${output.length} M3U links:`);
-                  output.forEach(url => console.log(`- ${url}`));
+              if (streamUrl) {
+                  fs.writeFileSync('m3u_links.txt', streamUrl);
+                  console.log(`🔗 Saved M3U8 URL: ${streamUrl}`);
               } else {
-                  fs.writeFileSync('m3u_links.txt', 'No M3U8 URLs found');
-                  console.log('❌ No M3U8 URLs found');
+                  fs.writeFileSync('m3u_links.txt', 'No M3U8 URL found');
+                  console.log('❌ No M3U8 URL found');
               }
 
               await browser.close();
