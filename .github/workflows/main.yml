@@ -1,4 +1,4 @@
-name: Puppeteer M3U Scraper
+name: Nova TV M3U Scraper
 
 on:
   schedule:
@@ -10,18 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout repository
       - uses: actions/checkout@v4
-
-      # 2️⃣ Setup Node.js
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-
-      # 3️⃣ Install latest Puppeteer
       - run: npm install puppeteer@latest
 
-      # 4️⃣ Run Puppeteer script
       - name: Run Puppeteer Script
         run: |
           node <<'EOF'
@@ -35,52 +29,72 @@ jobs:
                       '--no-sandbox',
                       '--disable-setuid-sandbox',
                       '--disable-dev-shm-usage',
-                      '--disable-gpu'
+                      '--disable-gpu',
+                      '--mute-audio'
                   ]
               });
 
               const page = await browser.newPage();
-
-              await page.setExtraHTTPHeaders({
-                  "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-                  "Referer": "https://nova.bg/"
-              });
+              await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+              await page.setViewport({ width: 1920, height: 1080 });
 
               console.log('🌐 Loading nova.bg/live...');
-              let streamUrls = new Set();
+              const streamUrls = new Set();
 
-              page.on('response', response => {
+              // Listen for all responses
+              page.on('response', async (response) => {
                   const url = response.url();
-                  if (url.includes('.m3u8')) {
-                      console.log('✅ Found:', url);
+                  if (url.includes('.m3u8') || url.includes('master.m3u8')) {
+                      console.log('✅ Found stream:', url);
                       streamUrls.add(url);
                   }
               });
 
               try {
-                  await page.goto('https://nova.bg/live', { waitUntil: 'domcontentloaded', timeout: 15000 });
+                  // Navigate to page and wait for player to load
+                  await page.goto('https://nova.bg/live', {
+                      waitUntil: 'networkidle2',
+                      timeout: 30000
+                  });
+
+                  // Wait specifically for the video player to load
+                  await page.waitForSelector('video', { timeout: 10000 });
+
+                  // Sometimes you need to interact with the player
+                  try {
+                      await page.click('.play-button');
+                      console.log('▶️ Clicked play button');
+                  } catch (e) {
+                      console.log('ℹ️ No play button found or already playing');
+                  }
+
+                  // Wait for streams to load
+                  await new Promise(r => setTimeout(r, 5000));
+
               } catch (e) {
-                  console.log("⚠️ Page load timeout:", e.message);
+                  console.log('⚠️ Error during scraping:', e.message);
               }
 
-              // ✅ Wait for late .m3u8 requests
-              await new Promise(r => setTimeout(r, 3000));
+              // Save results
+              const output = Array.from(streamUrls).filter(url => 
+                  url.includes('nova') || url.includes('netcom')
+              );
 
-              const output = Array.from(streamUrls);
-              const fileContent = output.length > 0 ? output.join('\n') : 'No URLs found';
-              fs.writeFileSync('m3u_links.txt', fileContent);
+              if (output.length > 0) {
+                  fs.writeFileSync('m3u_links.txt', output.join('\n'));
+                  console.log(`🔗 Saved ${output.length} M3U links:`);
+                  output.forEach(url => console.log(`- ${url}`));
+              } else {
+                  fs.writeFileSync('m3u_links.txt', 'No M3U8 URLs found');
+                  console.log('❌ No M3U8 URLs found');
+              }
 
-              console.log(`🔗 Saved ${output.length} M3U links to m3u_links.txt`);
               await browser.close();
           })();
           EOF
 
-      # 5️⃣ Upload artifact
       - name: Upload M3U Links Artifact
         uses: actions/upload-artifact@v4
         with:
           name: m3u-links
           path: m3u_links.txt
-
-
-
