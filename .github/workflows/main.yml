@@ -2,8 +2,8 @@ name: Puppeteer M3U Scraper
 
 on:
   schedule:
-    - cron: "0 */2 * * *"  # every 2 hours
-  workflow_dispatch:        # manual trigger
+    - cron: "*/10 * * * *"  # Runs every 10 minutes
+  workflow_dispatch:        # Still allows manual trigger
 
 jobs:
   scrape:
