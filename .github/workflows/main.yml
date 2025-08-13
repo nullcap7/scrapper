@@ -58,7 +58,7 @@ jobs:
               });
 
               try {
-                  await page.goto('https://nova.bg/live', { waitUntil: 'domcontentloaded', timeout: 15000 });
+                  await page.goto('https://iptv-bg.com/nova-tv-online', { waitUntil: 'domcontentloaded', timeout: 15000 });
               } catch (e) {
                   console.log("⚠️ Page load timeout:", e.message);
               }
