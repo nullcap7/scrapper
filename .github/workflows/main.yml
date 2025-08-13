@@ -18,7 +18,7 @@ jobs:
           echo "// Puppeteer script" > scraper.js
           # Paste your Puppeteer script here if you want inline
           node scraper.js
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: m3u-links
           path: m3u_links.txt
