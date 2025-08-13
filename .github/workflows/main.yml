@@ -1,4 +1,4 @@
-name: Nova TV M3U Scraper (tvmaniabg)
+name: Nova TV M3U Scraper (tvmaniabg with Referer)
 
 on:
   schedule:
@@ -35,17 +35,26 @@ jobs:
               });
 
               const page = await browser.newPage();
-              await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+              
+              // Set exact headers from your example
+              await page.setExtraHTTPHeaders({
+                  'Referer': 'https://tvmaniabg.com/nova-tv/',
+                  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',
+                  'Origin': 'https://tvmaniabg.com'
+              });
+
               await page.setViewport({ width: 1920, height: 1080 });
 
-              console.log('🌐 Loading tvmaniabg.com/nova-tv/...');
+              console.log('🌐 Loading tvmaniabg.com/nova-tv/ with custom headers...');
               let streamUrl = null;
 
               // Intercept all requests
               await page.setRequestInterception(true);
               page.on('request', (request) => {
                   const url = request.url();
-                  if (url.includes('ortepe.xyz') && url.includes('chunks.m3u8') && url.includes('novatv')) {
+                  if (url.includes('ortepe.xyz') && 
+                      (url.includes('playlist.m3u8') || url.includes('chunks.m3u8')) && 
+                      url.includes('novatv')) {
                       console.log('✅ Found stream URL:', url);
                       streamUrl = url;
                       request.abort();  // No need to actually load the stream
@@ -55,24 +64,25 @@ jobs:
               });
 
               try {
-                  // Navigate to page
+                  // Navigate to page with custom headers
                   await page.goto('https://tvmaniabg.com/nova-tv/', {
                       waitUntil: 'networkidle2',
                       timeout: 30000
                   });
 
-                  // Wait for player to potentially load
+                  // Wait for player initialization
                   await new Promise(r => setTimeout(r, 5000));
 
-                  // Try to click play button if exists
-                  const playButtons = [
+                  // Try to interact with player
+                  const playButtonSelectors = [
                       '.play-button',
                       '.vjs-big-play-button',
                       '[aria-label="Play"]',
-                      '.plyr__control--overlaid'
+                      '.plyr__control--overlaid',
+                      'button[title="Play"]'
                   ];
                   
-                  for (const selector of playButtons) {
+                  for (const selector of playButtonSelectors) {
                       try {
                           await page.click(selector);
                           console.log(`▶️ Clicked play button (${selector})`);
@@ -94,6 +104,15 @@ jobs:
               if (streamUrl) {
                   fs.writeFileSync('m3u_links.txt', streamUrl);
                   console.log(`🔗 Saved M3U8 URL: ${streamUrl}`);
+                  
+                  // Also save the required headers
+                  const headers = {
+                      'Referer': 'https://tvmaniabg.com/nova-tv/',
+                      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36',
+                      'Origin': 'https://tvmaniabg.com'
+                  };
+                  fs.writeFileSync('headers.json', JSON.stringify(headers, null, 2));
+                  console.log('📄 Saved required headers to headers.json');
               } else {
                   fs.writeFileSync('m3u_links.txt', 'No M3U8 URL found');
                   console.log('❌ No M3U8 URL found');
@@ -107,4 +126,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: m3u-links
-          path: m3u_links.txt
+          path: |
+            m3u_links.txt
+            headers.json
