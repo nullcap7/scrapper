@@ -18,8 +18,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Puppeteer
-        run: npm install puppeteer
+      - name: Install latest Puppeteer
+        run: npm install puppeteer@latest
 
       - name: Create scraper script
         run: |
@@ -70,4 +70,3 @@ jobs:
         with:
           name: m3u-links
           path: links.txt
-
