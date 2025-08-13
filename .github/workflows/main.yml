@@ -2,8 +2,8 @@ name: Puppeteer M3U Scraper
 
 on:
   schedule:
-    - cron: "*/10 * * * *"  # Runs every 10 minutes
-  workflow_dispatch:        # Still allows manual trigger
+    - cron: "0 */2 * * *"  # every 2 hours
+  workflow_dispatch:        # manual trigger
 
 jobs:
   scrape:
@@ -43,7 +43,7 @@ jobs:
 
               await page.setExtraHTTPHeaders({
                   "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-                  "Referer": "https://tvmaniabg.com/nova-tv/"
+                  "Referer": "https://nova.bg/"
               });
 
               console.log('🌐 Loading nova.bg/live...');
@@ -58,7 +58,7 @@ jobs:
               });
 
               try {
-                  await page.goto('https://tvmaniabg.com/nova-tv', { waitUntil: 'domcontentloaded', timeout: 15000 });
+                  await page.goto('https://nova.bg/live', { waitUntil: 'domcontentloaded', timeout: 15000 });
               } catch (e) {
                   console.log("⚠️ Page load timeout:", e.message);
               }
