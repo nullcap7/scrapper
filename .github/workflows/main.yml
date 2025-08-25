@@ -35,13 +35,19 @@ jobs:
               args: ['--no-sandbox', '--disable-setuid-sandbox']
             });
             const page = await browser.newPage();
-            await page.setUserAgent(
-              'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0 Safari/537.36'
-            );
+            const referer = 'https://www.gledaitv.fan/nova-live-tv.html';
+            const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36';
+            const origin = 'https://www.gledaitv.fan';
+
+            await page.setExtraHTTPHeaders({
+              Referer: referer,
+              Origin: origin
+            });
+            await page.setUserAgent(userAgent);
 
             const playlistLinks = new Set();
 
-            // Capture network requests
+            // Capture .m3u8 links from network
             page.on('request', request => {
               const url = request.url();
               if (url.match(/\.m3u8(\?.*)?$/i)) {
@@ -49,16 +55,14 @@ jobs:
               }
             });
 
-            await page.goto('https://www.gledaitv.fan/nova-live-tv.html', {
-              waitUntil: 'networkidle2'
-            });
+            await page.goto(referer, { waitUntil: 'networkidle2' });
             await new Promise(resolve => setTimeout(resolve, 5000));
 
-            // Scan page HTML for any .m3u8 links
+            // Also scan page content for any .m3u8 links
             const html = await page.content();
             const regex = /https?:\/\/[^\s'"]+\.m3u8[^\s'"]*/gi;
             const matches = html.match(regex);
-            if (matches && matches.length > 0) {
+            if (matches) {
               matches.forEach(link => playlistLinks.add(link));
             }
 
@@ -69,13 +73,19 @@ jobs:
               process.exit(1);
             }
 
-            // Save as JSON array
+            // Save URLs with headers needed for playback
             const jsonData = {
               updated: new Date().toISOString(),
+              headers: {
+                Referer: referer,
+                'User-Agent': userAgent,
+                Origin: origin
+              },
               urls: Array.from(playlistLinks)
             };
+
             fs.writeFileSync('playlist.json', JSON.stringify(jsonData, null, 2));
-            console.log('Playlist links saved to playlist.json:', jsonData.urls);
+            console.log('Saved .m3u8 links with headers to playlist.json');
           })();
           EOF
 
