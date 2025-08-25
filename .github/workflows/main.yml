@@ -41,8 +41,8 @@ jobs:
 
             page.on('request', request => {
               const url = request.url();
-              // Only grab playlist.m3u8, ignore chunks.m3u8
-              if (url.match(/playlist\.m3u8(\?.*)?$/i) && !playlistLink) {
+              // Capture any .m3u8 URL
+              if (url.match(/\.m3u8(\?.*)?$/i) && !playlistLink) {
                 playlistLink = url;
               }
             });
@@ -53,7 +53,7 @@ jobs:
             // If not found via network, scan HTML
             if (!playlistLink) {
               const html = await page.content();
-              const regex = /https?:\/\/[^\s'"]+playlist\.m3u8[^\s'"]*/gi;
+              const regex = /https?:\/\/[^\s'"]+\.m3u8[^\s'"]*/gi;
               const matches = html.match(regex);
               if (matches && matches.length > 0) {
                 playlistLink = matches[0];
@@ -63,7 +63,7 @@ jobs:
             await browser.close();
 
             if (!playlistLink) {
-              console.error('No playlist link found');
+              console.error('No .m3u8 link found');
               process.exit(1);
             }
 
