@@ -47,7 +47,7 @@ jobs:
               }
             });
 
-            await page.goto('https://nova.bg/live/', { waitUntil: 'networkidle2' });
+            await page.goto('https://www.gledaitv.fan/nova-live-tv.html', { waitUntil: 'networkidle2' });
             await new Promise(resolve => setTimeout(resolve, 5000));
 
             // If not found via network, scan HTML
