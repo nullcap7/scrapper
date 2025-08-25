@@ -1,4 +1,9 @@
 {
-  "updated": "2025-08-25T11:42:43.442Z",
-  "url": "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=2169807156f4ee06a05b2124122f5b218116e09d-8d020e838d3742d7720eb00f64b0bdb4-1756132655-1756121855"
+  "updated": "2025-08-25T11:46:00.538Z",
+  "urls": [
+    "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=27ba2f9b5d2886f11adcfe0a805f8bc7b237b32f-4d3a1028acc8571e9c554f03ac6bdab6-1756132852-1756122052",
+    "https://cdn9.stgledai.org/nova/index.m3u8?token=27ba2f9b5d2886f11adcfe0a805f8bc7b237b32f-4d3a1028acc8571e9c554f03ac6bdab6-1756132852-1756122052",
+    "https://cdn9.stgledai.org/nova/tracks-v3a1/mono.m3u8?token=27ba2f9b5d2886f11adcfe0a805f8bc7b237b32f-4d3a1028acc8571e9c554f03ac6bdab6-1756132852-1756122052",
+    "https://cdn9.stgledai.org/nova/tracks-v1a1/mono.m3u8?token=27ba2f9b5d2886f11adcfe0a805f8bc7b237b32f-4d3a1028acc8571e9c554f03ac6bdab6-1756132852-1756122052"
+  ]
 }
