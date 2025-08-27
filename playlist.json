@@ -1,12 +1,12 @@
 {
-  "updated": "2025-08-27T05:38:21.254Z",
+  "updated": "2025-08-27T06:16:29.770Z",
   "headers": {
     "Referer": "https://www.gledaitv.fan/nova-live-tv.html",
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
     "Origin": "https://www.gledaitv.fan"
   },
   "urls": [
-    "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=45029f48767c4694e80f11662e82d8006afb8985-db93d9ed235854bd899826b69123eedc-1756283591-1756272791",
-    "https://cdn8.stgledai.org/nova/index.m3u8?token=45029f48767c4694e80f11662e82d8006afb8985-db93d9ed235854bd899826b69123eedc-1756283591-1756272791"
+    "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=300caca83f6cbd89a4553767d363ce34ba02fbf1-13e4213405540a953eb593f74dc7dd8b-1756285880-1756275080",
+    "https://cdn11.stgledai.org/nova/index.m3u8?token=300caca83f6cbd89a4553767d363ce34ba02fbf1-13e4213405540a953eb593f74dc7dd8b-1756285880-1756275080"
   ]
 }
