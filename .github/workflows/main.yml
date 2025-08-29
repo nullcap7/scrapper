@@ -3,6 +3,7 @@ name: Run M3U Scraper
 on:
   workflow_dispatch:
   schedule:
+    - cron: "0 */1 * * *"
     - cron: "*/30 * * * *"
 
 jobs:
@@ -13,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }} # Use built-in token for push access
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -35,57 +36,42 @@ jobs:
               args: ['--no-sandbox', '--disable-setuid-sandbox']
             });
             const page = await browser.newPage();
-            const referer = 'https://www.gledaitv.fan/nova-live-tv.html';
-            const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36';
-            const origin = 'https://www.gledaitv.fan';
+            await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0 Safari/537.36');
 
-            await page.setExtraHTTPHeaders({
-              Referer: referer,
-              Origin: origin
-            });
-            await page.setUserAgent(userAgent);
+            let playlistLink = null;
 
-            const playlistLinks = new Set();
-
-            // Capture .m3u8 links from network
             page.on('request', request => {
               const url = request.url();
-              if (url.match(/\.m3u8(\?.*)?$/i)) {
-                playlistLinks.add(url);
+              // Only grab playlist.m3u8, ignore chunks.m3u8
+              if (url.match(/playlist\.m3u8(\?.*)?$/i) && !playlistLink) {
+                playlistLink = url;
               }
             });
 
-            await page.goto(referer, { waitUntil: 'networkidle2' });
+            await page.goto('https://tvmaniabg.com/nova-tv/', { waitUntil: 'networkidle2' });
             await new Promise(resolve => setTimeout(resolve, 5000));
 
-            // Also scan page content for any .m3u8 links
-            const html = await page.content();
-            const regex = /https?:\/\/[^\s'"]+\.m3u8[^\s'"]*/gi;
-            const matches = html.match(regex);
-            if (matches) {
-              matches.forEach(link => playlistLinks.add(link));
+            // If not found via network, scan HTML
+            if (!playlistLink) {
+              const html = await page.content();
+              const regex = /https?:\/\/[^\s'"]+playlist\.m3u8[^\s'"]*/gi;
+              const matches = html.match(regex);
+              if (matches && matches.length > 0) {
+                playlistLink = matches[0];
+              }
             }
 
             await browser.close();
 
-            if (playlistLinks.size === 0) {
-              console.error('No .m3u8 links found');
+            if (!playlistLink) {
+              console.error('No playlist link found');
               process.exit(1);
             }
 
-            // Save URLs with headers needed for playback
-            const jsonData = {
-              updated: new Date().toISOString(),
-              headers: {
-                Referer: referer,
-                'User-Agent': userAgent,
-                Origin: origin
-              },
-              urls: Array.from(playlistLinks)
-            };
-
+            // Save as JSON for your TV app
+            const jsonData = { updated: new Date().toISOString(), url: playlistLink };
             fs.writeFileSync('playlist.json', JSON.stringify(jsonData, null, 2));
-            console.log('Saved .m3u8 links with headers to playlist.json');
+            console.log('Playlist link saved to playlist.json:', playlistLink);
           })();
           EOF
 
@@ -97,5 +83,5 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git add playlist.json
-          git commit -m "Update playlist links" || echo "No changes to commit"
+          git commit -m "Update playlist link" || echo "No changes to commit"
           git push
