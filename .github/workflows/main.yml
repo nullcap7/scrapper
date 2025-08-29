@@ -14,7 +14,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} # Use built-in token for push access
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -36,15 +36,19 @@ jobs:
               args: ['--no-sandbox', '--disable-setuid-sandbox']
             });
             const page = await browser.newPage();
-            await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0 Safari/537.36');
+
+            const customUA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36';
+            await page.setUserAgent(customUA);
 
             let playlistLink = null;
+            let playlistHeaders = null;
 
             page.on('request', request => {
               const url = request.url();
               // Only grab playlist.m3u8, ignore chunks.m3u8
               if (url.match(/playlist\.m3u8(\?.*)?$/i) && !playlistLink) {
                 playlistLink = url;
+                playlistHeaders = request.headers();
               }
             });
 
@@ -58,6 +62,11 @@ jobs:
               const matches = html.match(regex);
               if (matches && matches.length > 0) {
                 playlistLink = matches[0];
+                playlistHeaders = {
+                  'referer': 'https://tvmaniabg.com/nova-tv/',
+                  'user-agent': customUA,
+                  'origin': 'https://tvmaniabg.com'
+                };
               }
             }
 
@@ -68,10 +77,29 @@ jobs:
               process.exit(1);
             }
 
-            // Save as JSON for your TV app
-            const jsonData = { updated: new Date().toISOString(), url: playlistLink };
+            // Format headers like you want (capitalized names + line breaks)
+            const formattedHeaders = [];
+            if (playlistHeaders['referer']) {
+              formattedHeaders.push(\`Referer: \${playlistHeaders['referer']}\`);
+            }
+            if (playlistHeaders['user-agent']) {
+              formattedHeaders.push(\`User-Agent: \${playlistHeaders['user-agent']}\`);
+            }
+            if (playlistHeaders['origin']) {
+              formattedHeaders.push(\`Origin: \${playlistHeaders['origin']}\`);
+            }
+
+            const headerOutput = formattedHeaders.join('\\n');
+
+            // Save as JSON
+            const jsonData = { 
+              updated: new Date().toISOString(), 
+              url: playlistLink,
+              headers: headerOutput
+            };
+
             fs.writeFileSync('playlist.json', JSON.stringify(jsonData, null, 2));
-            console.log('Playlist link saved to playlist.json:', playlistLink);
+            console.log('Playlist link + headers saved to playlist.json:\\n', jsonData);
           })();
           EOF
 
