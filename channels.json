@@ -1,14 +1,20 @@
 [
   {
     "title": "nova-tv",
-    "updated": "2025-08-30T10:58:30.850Z",
-    "url": "https://tmstream.xyz:34443/hls/novatv/playlist.m3u8?e=1756558703&st=xNAmjMf_YIBf6_lEHdmHxw",
+    "updated": "2025-08-30T10:59:39.458Z",
+    "url": "https://tmstream.xyz:34443/hls/novatv/playlist.m3u8?e=1756558773&st=xc97b_f4hrG2Jp_ub_9UOA",
     "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "bnt1",
-    "updated": "2025-08-30T10:58:37.010Z",
-    "url": "https://tmstream.xyz:34443/hls/bnt1/playlist.m3u8?e=1756558711&st=qHGO1LdABy13zD3drrXLaA",
+    "updated": "2025-08-30T10:59:45.539Z",
+    "url": "https://tmstream.xyz:34443/hls/bnt1/playlist.m3u8?e=1756558779&st=aDF3G4_1b5FZ-i2-ReMXmQ",
     "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+  },
+  {
+    "title": "nova-tv-online",
+    "updated": "2025-08-30T10:59:54.912Z",
+    "url": "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=7f23251532b74a1b2080dcca467506df16907c62-0e1baa9b5b945bc27b72325bf82749bb-1756562085-1756551285",
+    "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   }
 ]
