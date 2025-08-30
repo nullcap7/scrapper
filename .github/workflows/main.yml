@@ -33,7 +33,7 @@ jobs:
           const urls = [
             'https://tvmaniabg.com/nova-tv/',
             'https://tvmaniabg.com/bnt1/',
-
+            'https://www.gledaitv.live/watch-tv/60/nova-tv-online'
           ];
 
           (async () => {
@@ -52,9 +52,10 @@ jobs:
               let playlistLink = null;
               let playlistHeaders = null;
 
+              // Catch .m3u8 links (with or without token)
               page.on('request', request => {
                 const url = request.url();
-                if (url.match(/playlist\.m3u8(\?.*)?$/i) && !playlistLink) {
+                if (url.match(/\.m3u8(\?.*)?$/i) && !playlistLink) {
                   playlistLink = url;
                   playlistHeaders = request.headers();
                 }
@@ -63,9 +64,10 @@ jobs:
               await page.goto(site, { waitUntil: 'networkidle2' });
               await new Promise(resolve => setTimeout(resolve, 5000));
 
+              // Fallback: scan HTML for .m3u8
               if (!playlistLink) {
                 const html = await page.content();
-                const regex = /https?:\/\/[^\s'"]+playlist\.m3u8[^\s'"]*/gi;
+                const regex = /https?:\/\/[^\s'"]+\.m3u8[^\s'"]*/gi;
                 const matches = html.match(regex);
                 if (matches && matches.length > 0) {
                   playlistLink = matches[0];
@@ -89,7 +91,7 @@ jobs:
               if (playlistHeaders['user-agent']) formattedHeaders.push(`User-Agent: ${playlistHeaders['user-agent']}`);
               if (playlistHeaders['origin']) formattedHeaders.push(`Origin: ${playlistHeaders['origin']}`);
 
-              // Extract last segment as title
+              // Use last segment of URL as title (e.g. nova-tv, bnt1)
               const title = site.split('/').filter(Boolean).pop();
 
               results.push({
