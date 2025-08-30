@@ -1,0 +1,14 @@
+[
+  {
+    "site": "https://tvmaniabg.com/nova-tv/",
+    "updated": "2025-08-30T09:15:12.790Z",
+    "url": "https://tmstream.xyz:34443/hls/novatv/playlist.m3u8?e=1756552506&st=nprqvWxYqBc-372n7aYwtw",
+    "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+  },
+  {
+    "site": "https://tvmaniabg.com/bnt1/",
+    "updated": "2025-08-30T09:15:20.959Z",
+    "url": "https://tmstream.xyz:34443/hls/bnt1/playlist.m3u8?e=1756552513&st=RzuMs18ekPuc-FtOOxJ70A",
+    "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+  }
+]
