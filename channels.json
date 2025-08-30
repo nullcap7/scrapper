@@ -1,32 +1,32 @@
 [
   {
     "title": "nova-tv",
-    "updated": "2025-08-30T11:20:03.255Z",
-    "url": "https://tmstream.xyz:34443/hls/novatv/playlist.m3u8?e=1756559997&st=sXeovnpYiXsLvms2qLGeIw",
+    "updated": "2025-08-30T11:34:55.189Z",
+    "url": "https://tmstream.xyz:34443/hls/novatv/playlist.m3u8?e=1756560889&st=G3vLCFDM5y21lCAiRdS-1g",
     "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "bnt1",
-    "updated": "2025-08-30T11:20:10.827Z",
-    "url": "https://tmstream.xyz:34443/hls/bnt1/playlist.m3u8?e=1756560003&st=dZwuev77KeggFqanys4jZQ",
+    "updated": "2025-08-30T11:35:02.691Z",
+    "url": "https://tmstream.xyz:34443/hls/bnt1/playlist.m3u8?e=1756560895&st=lz9-op1ybaBqPh9i0J-haA",
     "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "nova-tv-online",
-    "updated": "2025-08-30T11:20:19.031Z",
-    "url": "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=1870ad113636a5edc1c82537443f916ff6fb345e-4080600339c7326fd477d14bf097d315-1756563311-1756552511",
+    "updated": "2025-08-30T11:35:12.240Z",
+    "url": "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=fde45b3c5f290028421fd17dab78a597c5cfe8e6-077cf9d0c35841cb067aa3cced49c1a8-1756564204-1756553404",
     "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "bnt-1-online",
-    "updated": "2025-08-30T11:20:27.565Z",
-    "url": "https://cdn.stgledai.org:8082/hls/bnt/index.m3u8?token=a002e5fc1167492c33c1b3241de4b1ac5e4b298a-088b4e6f814faaf867896fa039e5d7f6-1756563319-1756552519",
+    "updated": "2025-08-30T11:35:20.956Z",
+    "url": "https://cdn.stgledai.org:8082/hls/bnt/index.m3u8?token=4280eaafc9c2973c81f4dc9d301a60e8779a16d4-76b60a88eb150efc7b7a675891e84561-1756564212-1756553412",
     "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "24-kitchen-online",
-    "updated": "2025-08-30T11:20:35.237Z",
-    "url": "https://cdn.stgledai.org:8082/hls/24kitchen/index.m3u8?token=a89e7a7fc64f5d905e65a4d998c969aaf94935c0-9161ece4848148e567aa7491e933a896-1756563327-1756552527",
+    "updated": "2025-08-30T11:35:28.864Z",
+    "url": "https://cdn.stgledai.org:8082/hls/24kitchen/index.m3u8?token=8d4fa4a54ae20b54d0036fa13765b02e6f20218f-c0c769d93b4c3f74bb53db9dd41637fd-1756564221-1756553421",
     "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   }
 ]
