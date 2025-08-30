@@ -1,44 +1,44 @@
 [
   {
     "title": "nova-tv",
-    "updated": "2025-08-30T13:41:18.904Z",
-    "url": "https://tmstream.xyz:34443/hls/novatv/playlist.m3u8?e=1756568472&st=da2bce3GVumbbDTlyuDDJQ",
+    "updated": "2025-08-30T13:58:56.096Z",
+    "url": "https://tmstream.xyz:34443/hls/novatv/playlist.m3u8?e=1756569530&st=K2i8jJ2i6uXPHNwgy57GTA",
     "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "bnt1",
-    "updated": "2025-08-30T13:41:25.064Z",
-    "url": "https://tmstream.xyz:34443/hls/bnt1/playlist.m3u8?e=1756568479&st=guUzQUkFxHFkRMKT9Wcyzg",
+    "updated": "2025-08-30T13:59:03.635Z",
+    "url": "https://tmstream.xyz:34443/hls/bnt1/playlist.m3u8?e=1756569536&st=pgp6GG4gn93ukzp5IpRfuw",
     "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "nova-tv-online",
-    "updated": "2025-08-30T13:41:34.056Z",
-    "url": "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=adb29eb7ba5ae6569d9e2b2be508411b09e30710-aa75b614d176bc2ff525789b471994ab-1756571785-1756560985",
+    "updated": "2025-08-30T13:59:13.449Z",
+    "url": "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=1265bb50b0aa76ce8cf249dcc604182c0da383a7-b0eba15ea0c74b3586cdede1febb1b07-1756572844-1756562044",
     "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "bnt-1-online",
-    "updated": "2025-08-30T13:41:42.479Z",
-    "url": "https://cdn.stgledai.org:8082/hls/bnt/index.m3u8?token=1759843cf840f1dca5bb8cafa415591998660e2e-8237b3be180e7a32d2d472ad3cdfca22-1756571794-1756560994",
+    "updated": "2025-08-30T13:59:21.626Z",
+    "url": "https://cdn.stgledai.org:8082/hls/bnt/index.m3u8?token=3b3dc9c6f8ca6bcce066e9c4ac4fdd9f004207b4-7bd3344a4a5acdec1580c5dccf89c89d-1756572853-1756562053",
     "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "24-kitchen-online",
-    "updated": "2025-08-30T13:41:50.418Z",
-    "url": "https://cdn.stgledai.org:8082/hls/24kitchen/index.m3u8?token=6bc2474a6281bf7ac8264c6d62ba43a9b95c54a3-2d8f6b834e1f2d63d2ba6de2026ac2f4-1756571802-1756561002",
+    "updated": "2025-08-30T13:59:29.792Z",
+    "url": "https://cdn.stgledai.org:8082/hls/24kitchen/index.m3u8?token=08f6eff01c68f79e682de5d281bd0833c0c06303-547350fd241e7ed445ddb5fcec806c6c-1756572861-1756562061",
     "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "btv",
-    "updated": "2025-08-30T13:41:58.437Z",
-    "url": "https://ipstream.xyz:8443/hls/btv/playlist.m3u8?e=1756568511&st=boSoRUoz_oOdRoVp3iM6zg",
+    "updated": "2025-08-30T13:59:37.624Z",
+    "url": "https://ipstream.xyz:8443/hls/btv/playlist.m3u8?e=1756569570&st=dAMPYHAwk4POaoigWdTZsw",
     "headers": "Referer: https://iptv-bg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "btv-online",
-    "updated": "2025-08-30T13:42:06.288Z",
-    "url": "https://cdn.stgledai.org:8082/hls/btv/index.m3u8?token=d2392ad9c48856786aa661b69829477598729738-5bd6216268ec1afd35680d21163590c9-1756571818-1756561018",
+    "updated": "2025-08-30T13:59:45.917Z",
+    "url": "https://cdn.stgledai.org:8082/hls/btv/index.m3u8?token=0ef183fe6febd02209a9f0b4805a0fff9fc71297-35c0af81bc70bb025fc9cfe83d32223e-1756572878-1756562078",
     "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   }
 ]
