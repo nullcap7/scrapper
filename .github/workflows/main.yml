@@ -35,7 +35,8 @@ jobs:
             'https://tvmaniabg.com/bnt1/',
             'https://www.gledaitv.live/watch-tv/60/nova-tv-online',
             'https://www.gledaitv.live/watch-tv/64/bnt-1-online',
-            'https://www.gledaitv.live/watch-tv/35/24-kitchen-online'
+            'https://www.gledaitv.live/watch-tv/35/24-kitchen-online',
+            'https://iptv-bg.com/btv/'
           ];
 
           (async () => {
