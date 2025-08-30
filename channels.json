@@ -1,20 +1,26 @@
 [
   {
     "title": "nova-tv",
-    "updated": "2025-08-30T10:59:39.458Z",
-    "url": "https://tmstream.xyz:34443/hls/novatv/playlist.m3u8?e=1756558773&st=xc97b_f4hrG2Jp_ub_9UOA",
+    "updated": "2025-08-30T11:08:44.049Z",
+    "url": "https://tmstream.xyz:34443/hls/novatv/playlist.m3u8?e=1756559317&st=7vN2mCGZYepIbvo1Po_AKg",
     "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "bnt1",
-    "updated": "2025-08-30T10:59:45.539Z",
-    "url": "https://tmstream.xyz:34443/hls/bnt1/playlist.m3u8?e=1756558779&st=aDF3G4_1b5FZ-i2-ReMXmQ",
+    "updated": "2025-08-30T11:08:51.629Z",
+    "url": "https://tmstream.xyz:34443/hls/bnt1/playlist.m3u8?e=1756559324&st=BMRPwcjIJGxmJpJ9vXeAxA",
     "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "nova-tv-online",
-    "updated": "2025-08-30T10:59:54.912Z",
-    "url": "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=7f23251532b74a1b2080dcca467506df16907c62-0e1baa9b5b945bc27b72325bf82749bb-1756562085-1756551285",
+    "updated": "2025-08-30T11:09:01.025Z",
+    "url": "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=1f7fa79c0feda5d8977555a68173746ef74a6ced-f3518c29d05f7837f913186718e04c51-1756562632-1756551832",
+    "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+  },
+  {
+    "title": "bnt-1-online",
+    "updated": "2025-08-30T11:09:09.343Z",
+    "url": "https://cdn.stgledai.org:8082/hls/bnt/index.m3u8?token=e2de689d5cc9fbc62673bc80f1c81963a5ea04d7-e5b8dffc81bfda20829c00a8f9e6f70a-1756562641-1756551841",
     "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   }
 ]
