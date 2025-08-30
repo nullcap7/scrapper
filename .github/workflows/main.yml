@@ -80,16 +80,16 @@ jobs:
             // Format headers like you want (capitalized names + line breaks)
             const formattedHeaders = [];
             if (playlistHeaders['referer']) {
-              formattedHeaders.push(\`Referer: \${playlistHeaders['referer']}\`);
+              formattedHeaders.push(`Referer: ${playlistHeaders['referer']}`);
             }
             if (playlistHeaders['user-agent']) {
-              formattedHeaders.push(\`User-Agent: \${playlistHeaders['user-agent']}\`);
+              formattedHeaders.push(`User-Agent: ${playlistHeaders['user-agent']}`);
             }
             if (playlistHeaders['origin']) {
-              formattedHeaders.push(\`Origin: \${playlistHeaders['origin']}\`);
+              formattedHeaders.push(`Origin: ${playlistHeaders['origin']}`);
             }
 
-            const headerOutput = formattedHeaders.join('\\n');
+            const headerOutput = formattedHeaders.join('\n');
 
             // Save as JSON
             const jsonData = { 
@@ -99,7 +99,7 @@ jobs:
             };
 
             fs.writeFileSync('playlist.json', JSON.stringify(jsonData, null, 2));
-            console.log('Playlist link + headers saved to playlist.json:\\n', jsonData);
+            console.log('Playlist link + headers saved to playlist.json:\n', jsonData);
           })();
           EOF
 
