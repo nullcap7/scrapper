@@ -88,8 +88,11 @@ jobs:
               if (playlistHeaders['user-agent']) formattedHeaders.push(`User-Agent: ${playlistHeaders['user-agent']}`);
               if (playlistHeaders['origin']) formattedHeaders.push(`Origin: ${playlistHeaders['origin']}`);
 
+              // Extract last segment as title
+              const title = site.split('/').filter(Boolean).pop();
+
               results.push({
-                site,
+                title,
                 updated: new Date().toISOString(),
                 url: playlistLink,
                 headers: formattedHeaders.join('\n')
@@ -98,8 +101,8 @@ jobs:
 
             await browser.close();
 
-            fs.writeFileSync('playlists.json', JSON.stringify(results, null, 2));
-            console.log('All playlist links saved to playlists.json:\n', results);
+            fs.writeFileSync('channels.json', JSON.stringify(results, null, 2));
+            console.log('All playlist links saved to channels.json:\n', results);
           })();
           EOF
 
@@ -110,6 +113,6 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add playlists.json
-          git commit -m "Update playlist links" || echo "No changes to commit"
+          git add channels.json
+          git commit -m "Update channels list" || echo "No changes to commit"
           git push
