@@ -1,20 +1,20 @@
 [
   {
     "title": "nova-tv",
-    "updated": "2025-08-30T09:39:48.688Z",
-    "url": "https://tmstream.xyz:34443/hls/novatv/playlist.m3u8?e=1756553982&st=V4ztAoHlTdqNYOXyK4GBCg",
+    "updated": "2025-08-30T09:41:13.651Z",
+    "url": "https://tmstream.xyz:34443/hls/novatv/playlist.m3u8?e=1756554067&st=QqeQoEgfYkFazAgv5i5A4w",
     "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "bnt1",
-    "updated": "2025-08-30T09:39:56.316Z",
-    "url": "https://tmstream.xyz:34443/hls/bnt1/playlist.m3u8?e=1756553989&st=6ljGBXaS7FYaitpZMjE4hA",
+    "updated": "2025-08-30T09:41:21.521Z",
+    "url": "https://tmstream.xyz:34443/hls/bnt1/playlist.m3u8?e=1756554074&st=QQ1uE_3L-DKPXLfYp-4JAA",
     "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "live",
-    "updated": "2025-08-30T09:40:11.345Z",
-    "url": "https://lbn-ts.cdn.bg/ntv-inter/fls/ntv_1.stream/at=O0M9MjAuOTguMTguNjc7RT0xNzU2NTY4Mzk5O0E9MTtLPTM7UD0wMTExMDtTPTEzNmFiNGYzYmNmN2NhMjg1OWJmMWY4NWQ3ZjA2ODQ5MTFjMDE1Nzc=/playlist.m3u8",
+    "updated": "2025-08-30T09:41:34.906Z",
+    "url": "https://lbn-ts.cdn.bg/ntv-inter/fls/ntv_1.stream/at=O0M9NTIuMTU5LjI0NC42NTtFPTE3NTY1Njg0ODU7QT0xO0s9MztQPTAxMTEwO1M9ZGNlMTUxMjIxNmQxYmVlMDczYmI1OTZjMWJjNzY2OTM2OTAzN2ZmNA==/playlist.m3u8",
     "headers": "Referer: https://i.cdn.bg/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   }
 ]
