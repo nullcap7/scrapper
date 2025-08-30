@@ -33,8 +33,7 @@ jobs:
           const urls = [
             'https://tvmaniabg.com/nova-tv/',
             'https://tvmaniabg.com/bnt1/',
-            'https://nova.bg/live',
-            'https://www.gledaitv.live/watch-tv/60/nova-tv-online'
+
           ];
 
           (async () => {
