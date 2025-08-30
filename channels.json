@@ -1,20 +1,14 @@
 [
   {
     "title": "nova-tv",
-    "updated": "2025-08-30T09:41:13.651Z",
-    "url": "https://tmstream.xyz:34443/hls/novatv/playlist.m3u8?e=1756554067&st=QqeQoEgfYkFazAgv5i5A4w",
+    "updated": "2025-08-30T09:53:21.351Z",
+    "url": "https://tmstream.xyz:34443/hls/novatv/playlist.m3u8?e=1756554795&st=mVrnxTY5FQpJh28_d3woRw",
     "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "bnt1",
-    "updated": "2025-08-30T09:41:21.521Z",
-    "url": "https://tmstream.xyz:34443/hls/bnt1/playlist.m3u8?e=1756554074&st=QQ1uE_3L-DKPXLfYp-4JAA",
+    "updated": "2025-08-30T09:53:27.439Z",
+    "url": "https://tmstream.xyz:34443/hls/bnt1/playlist.m3u8?e=1756554801&st=Id2jCiBK7XSF7YwUxRuziA",
     "headers": "Referer: https://tvmaniabg.com/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
-  },
-  {
-    "title": "live",
-    "updated": "2025-08-30T09:41:34.906Z",
-    "url": "https://lbn-ts.cdn.bg/ntv-inter/fls/ntv_1.stream/at=O0M9NTIuMTU5LjI0NC42NTtFPTE3NTY1Njg0ODU7QT0xO0s9MztQPTAxMTEwO1M9ZGNlMTUxMjIxNmQxYmVlMDczYmI1OTZjMWJjNzY2OTM2OTAzN2ZmNA==/playlist.m3u8",
-    "headers": "Referer: https://i.cdn.bg/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   }
 ]
