@@ -1,26 +1,26 @@
 [
   {
     "title": "nova-tv-online",
-    "updated": "2025-09-10T03:48:13.199Z",
-    "url": "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=34e8485c1c62b429642ab4efa77e20f1a1c6ccd5-453ee81e49a111f20bafb3f0d05fb99f-1757486585-1757475785",
+    "updated": "2025-09-10T03:55:42.916Z",
+    "url": "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=04a5a43c6b647612097d72d25080c6b3a5a685e1-d8607a0083d213c33cedf9d54a7cb3c1-1757487034-1757476234",
     "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "bnt-1-online",
-    "updated": "2025-09-10T03:48:21.723Z",
-    "url": "https://cdn.stgledai.org:8082/hls/bnt/index.m3u8?token=338f24883ac3d6e2ca46bed6289df8944e841155-b28dcf380297ffa0db596f88bf231acd-1757486593-1757475793",
+    "updated": "2025-09-10T03:55:51.148Z",
+    "url": "https://cdn.stgledai.org:8082/hls/bnt/index.m3u8?token=fbd197bedc7af5432ebc7de8db5f1980e9e03b4c-f7108a85e0b841ba157dc745e807fea5-1757487043-1757476243",
     "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "24-kitchen-online",
-    "updated": "2025-09-10T03:48:29.490Z",
-    "url": "https://cdn.stgledai.org:8082/hls/24kitchen/index.m3u8?token=bcd7deab6ecbefb992dd10877f7c58ad92a55e86-a872953c9c8725e59d58a80497a7569b-1757486602-1757475802",
+    "updated": "2025-09-10T03:55:59.062Z",
+    "url": "https://cdn.stgledai.org:8082/hls/24kitchen/index.m3u8?token=038e12c2e4d8b719b1788b2d427bfba22c9f78e9-2fa9755bc17c34eb431fa257c5701eb6-1757487051-1757476251",
     "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   },
   {
     "title": "btv-online",
-    "updated": "2025-09-10T03:48:37.701Z",
-    "url": "https://cdn.stgledai.org:8082/hls/btv/index.m3u8?token=bf3dd3e5b8456777f95236e128a76e1506bec10e-9c1ddf9dd03ca51bbedc5ad88ce4f99a-1757486609-1757475809",
+    "updated": "2025-09-10T03:56:07.034Z",
+    "url": "https://cdn.stgledai.org:8082/hls/btv/index.m3u8?token=618888530e3640ef1aa6e26da9925961d042a53b-66fac15dad061d8a094715cf570dc3d5-1757487059-1757476259",
     "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   }
 ]
