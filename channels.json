@@ -1,8 +1,8 @@
 [
   {
     "title": "nova-tv-online",
-    "updated": "2025-09-11T11:10:10.307Z",
-    "url": "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=f1d9a702db547a50eea132cfe9eeb3eead5a2435-b269760faa9d071c7378ac2c2cb498cb-1757599501-1757588701",
+    "updated": "2025-09-11T11:23:24.450Z",
+    "url": "https://cdn.stgledai.org:8082/hls/nova/index.m3u8?token=95d0c4918d839dede311334ebe8982e4bc7098a5-d8eab10420b69bfaf3f778846331a260-1757600294-1757589494",
     "headers": "Referer: https://cdn.gledaitv.live/\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
   }
 ]
